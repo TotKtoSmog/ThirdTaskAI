@@ -10,12 +10,12 @@ namespace ThirdTaskAI
     {
         internal string tag;
         internal char texture;
-        internal bool isHappy;
-        internal Cell(char texture, string tag = "", bool isHappy = false)
+        internal ConsoleColor color;
+        internal Cell(char texture, ConsoleColor color, string tag = "")
         {
             this.texture = texture;
             this.tag = tag;
-            this.isHappy = isHappy;
+            this.color = color;
         }
     }
 }
