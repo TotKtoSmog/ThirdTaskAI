@@ -39,7 +39,7 @@ namespace ThirdTaskAI
             this.typeA = typeA;
             this.typeB = typeB;
             this.empty = empty;
-            countA = countB = size * size / 100 * 40;
+            countA = countB = size * size / 100 * 45;
             countShuffle = 5;
             Emptys = new List<Point>();
             unHappys = new List<Point>();
@@ -140,12 +140,14 @@ namespace ThirdTaskAI
         internal void algorithmStart(int maxCountStep, int delay)
         {
             long count = 0;
-            while(unHappys.Count != 0 && count< maxCountStep)
+            show();
+            Console.ReadKey();
+            while (unHappys.Count != 0 && count< maxCountStep)
             {
                 count++;
                 Console.Clear();
                 Step();
-                show(false);
+                show();
                 Console.WriteLine("===============");
                 Console.WriteLine($"Номер шага: {count}");
                 Console.WriteLine($"Кол-во пустых: {Emptys.Count}");
@@ -153,8 +155,19 @@ namespace ThirdTaskAI
                 Console.WriteLine($"Выбрана не клетка на позиции: ({_unHappy.x}, {_unHappy.x})");
                 Console.WriteLine($"Перемещена на позицию: ({_empty.x}, {_empty.x})");
                 Console.WriteLine("===============");
+                if(count == 50 || count == 100 || count == 250 || count == 500 || count == 1000)
+                    Console.ReadKey();
                 Thread.Sleep(delay);
             }
+        }
+        private void setValueInPos()
+        {
+            Point consoleCursorPosition = new Point(Console.CursorTop, Console.CursorLeft);
+            Console.SetCursorPosition(_empty.y, _empty.x);
+            Console.Write(celles[_empty.x, _empty.y].texture);
+            Console.SetCursorPosition(_unHappy.y, _unHappy.x);
+            Console.Write(celles[_unHappy.x, _unHappy.y].texture);
+            Console.SetCursorPosition(consoleCursorPosition.y, consoleCursorPosition.x);
         }
 
     }
